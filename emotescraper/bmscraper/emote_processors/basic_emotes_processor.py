@@ -52,19 +52,24 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
         file_name = self.single_emotes_filename.format(emote['sr'], max(emote['names'], key=len))
         if not os.path.exists(file_name):
             cropped = self.extract_single_image(emote, self.image)
-            if cropped:
-                try:
-                    if not os.path.exists(os.path.dirname(file_name)):
-                        try:
-                            os.makedirs(os.path.dirname(file_name))
-                        except OSError:
-                            pass
+            if not cropped:
+                return
 
-                    f = open(file_name, 'wb')
-                    cropped.save(f)
-                    f.close()
-                except Exception, e:
-                    logger.exception(e)
+            if not cropped.getbbox():
+                logger.warn("{} might be empty".format(file_name))
+
+            try:
+                if not os.path.exists(os.path.dirname(file_name)):
+                    try:
+                        os.makedirs(os.path.dirname(file_name))
+                    except OSError:
+                        pass
+
+                f = open(file_name, 'wb')
+                cropped.save(f)
+                f.close()
+            except Exception, e:
+                logger.exception(e)
 
     def load_image(self, image_file):
         f = open(image_file, 'rb')
@@ -80,13 +85,75 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
         height = emote['height']
         if 'background-position' in emote:
             if len(emote['background-position']) > 0:
-                x = int(emote['background-position'][0].strip('-').strip('px').strip('%'))
+                x = int(emote['background-position'][0].strip('px').strip('%'))
                 if emote['background-position'][0].endswith('%'):
                     x = width * x / 100;
 
             if len(emote['background-position']) > 1:
-                y = int(emote['background-position'][1].strip('-').strip('px').strip('%'))
+                y = int(emote['background-position'][1].strip('px').strip('%'))
                 if emote['background-position'][1].endswith('%'):
                     y = height * y / 100;
 
-        return image.crop((x, y, x + width, y + height))
+        # Convert css coordinates to image coordiantes
+        if x > 0:
+            # Positives values appear from the left side of the image
+            x = image.size[0] - x
+        else:
+            # Negative values are converted to positive
+            x *= -1;
+
+        # If they exceed the image, shift them down, because css background images repeat
+        while x >= image.size[0]:
+            x -= image.size[0]
+
+        if y > 0:
+            y = image.size[1] - y
+        else:
+            y *= -1;
+
+        while y >= image.size[1]:
+            y -= image.size[1]
+
+        # If the crop area fits inside the image, return it
+        if x + width < image.size[0] and y + height < image.size[1]:
+            return image.crop((x, y, x + width, y + height))
+
+        if x + width > image.size[0] and y + height > image.size[1]:
+            logger.warn("Emote {}, SR {}: Both width and height exceed image.size".format(max(emote['names'], key=len), emote['sr']))
+
+        single_image = Image.new(image.mode, (width, height))
+
+        # Crop to image borders
+        crop_width = width
+        if x + width > image.size[0]:
+            crop_width = image.size[0] - x
+
+        crop_height = height
+        if y + height > image.size[1]:
+            crop_height = image.size[1] - y
+
+        crop = image.crop((x, y, x + crop_width, y + crop_height))
+        # Paste area 1
+        single_image.paste(crop, (0, 0, crop_width, crop_height))
+
+        # Wrap around
+        crop_x = x
+        crop_width = x + width
+        paste_x = 0
+        if x + width > image.size[0]:
+            crop_x = 0
+            crop_width = x
+            paste_x = crop.size[0]
+
+        crop_y = y
+        crop_height = y + height
+        paste_y = 0
+        if y + height > image.size[1]:
+            crop_y = 0
+            crop_height = y
+            paste_y = crop.size[1]
+
+        crop = image.crop((crop_x, crop_y, crop_width, crop_height))        
+        # Paste area 2
+        single_image.paste(crop, (paste_x, paste_y, paste_x + crop.size[0], paste_y + crop.size[1]))
+        return single_image
