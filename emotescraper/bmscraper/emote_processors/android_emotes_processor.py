@@ -142,6 +142,7 @@ class AndroidEmotesProcessor(BasicEmotesProcessor, APNGCheck):
     def process_emote(self, emote):
         if self.is_apng(self.image_data):
             logger.debug('Found apng image: %s', self._image_name)
+            frame_hashes = {}
             for frame in self._apng_frames:
                 image = Image.open(StringIO(frame['image']))
                 cropped = self.extract_single_image(emote, image)
@@ -162,6 +163,16 @@ class AndroidEmotesProcessor(BasicEmotesProcessor, APNGCheck):
                         f.close()
                     
                     
+                    frame_hash = hashfile(file_name)
+                    if frame_hashes.has_key(frame_hash):
+                        logger.debug('Duplicate found: {}'.format(file_name))
+                        os.unlink(file_name)
+                        file_name = frame_hashes[frame_hash]['file_name']
+                        emote_url = frame_hashes[frame_hash]['emote_url']
+                    else:
+                        frame_hashes[frame_hash] = {'file_name': file_name,
+                                                    'emote_url': emote_url}
+
                     a_emote = {'names': emote['names'],
                                'image': emote_url,
                                'hash': hashfile(file_name, '{}.{}'.format(emote_url, frame['delay'])),
