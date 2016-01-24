@@ -38,7 +38,6 @@ class BMScraper(FileNameUtils):
         self.password = None
         self.emotes = []
         self.image_blacklist = []
-        self.nsfw_subreddits = []
         self.emote_info = []
         self.tags_data = {}
         self.cache_dir = '../images'
@@ -64,9 +63,12 @@ class BMScraper(FileNameUtils):
                             logger.debug('Removing {} from {}'.format(name, emote['sr']))
                         else:
                             seen_emotes.add(name)
-
+                    
                     if len(emote['names']) == 0:
                         logger.debug('Completely removed')
+                        self.emotes.remove(emote)
+                    elif 'nsfw' in emote and emote['nsfw']:
+                        logger.info('Removing {} (NSFW)'.format(emote['names'][0]))
                         self.emotes.remove(emote)
 
     def _fetch_css(self):
@@ -213,6 +215,9 @@ class BMScraper(FileNameUtils):
             logger.error("No css for {} found".format(subreddit))
             return
 
+        self._handle_css(css, subreddit)
+
+    def _handle_css(self, css, subreddit):
         emotes_staging = self._parse_css(css)
         if not emotes_staging:
             return
@@ -246,8 +251,6 @@ class BMScraper(FileNameUtils):
                         if now - added_date < timedelta(days=7):
                             emote['tags'].append('new')
 
-            if subreddit in self.nsfw_subreddits:
-                emote['nsfw'] = True
             emote['sr'] = subreddit
 
             # Sometimes people make css errors, fix those.

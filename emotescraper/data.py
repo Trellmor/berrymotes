@@ -1,9 +1,3 @@
-nsfw_subreddits = [
-    # Subreddits which when scraped will automatically have any emotes tagged as nsfw.
-    "mylittlensfw",
-    "clopmotes"
-]
-
 image_blacklist = [
     # Prevent any of the stylesheets from ever being emoted.
     "a.thumbs.redditmedia.com/4BIUyA0SW1OkC5ON.png",
@@ -46,7 +40,7 @@ subreddits = [
     "appledashquisition",
     "applefritter",
     "applejack",
-    "arborus",
+    #"arborus", Removed because invite only
     "babsquisition",
     "batquisition",
     "beautybrass",
@@ -67,8 +61,8 @@ subreddits = [
     "chakolateemotes",
     "cheesesandwichmlp",
     "cianimotes",
-    "clopclop",
-    "clopmotes",
+    #"clopclop", Dropped because NSFW
+    #"clopmotes", Dropped because NSFW
     "cloudchasermotes",
     "commabombing",
     "cuttershy",
@@ -110,13 +104,13 @@ subreddits = [
     "mlpvectors",
     "molestia",
     "mortdoesreddit",
-    "multihoofdrinking",
+    #"multihoofdrinking", Dropped because invite only
     "mylittleadventuretime",
     "mylittlealcoholic",
     "mylittleandysonic1",
     "mylittleanhero23",
     "mylittleanime",
-    "mylittleaprilfools",
+    #"mylittleaprilfools", Droppend because no longer maintained
     "mylittleayrl",
     "mylittlebannertest",
     "mylittlecelestias",
@@ -152,7 +146,7 @@ subreddits = [
     "mylittlenanners",
     "mylittlenopenopenope",
     "mylittlenosleep",
-    "mylittlensfw",
+    #"mylittlensfw", Dropped because NSFW
     "mylittleonions",
     "mylittlepeanutgallery",
     "mylittlepugnippets",
@@ -196,7 +190,7 @@ subreddits = [
     "sexyconfederatereddit",
     "shadeschatlounge",
     "shittyemotes",
-    "spaceclop",
+    #"spaceclop", Dropped because NSFW
     "spanishmeerkat",
     "speedingturtle",
     "spitquisition",
@@ -213,7 +207,7 @@ subreddits = [
     "thebestpony",
     "thecane",
     "trixquisition",
-    "themirishponies",
+    #"themirishponies", Dropped because invite only
     "tiltemotes",
     "twidashmotes",
     "twilightsparkle",
