@@ -44,6 +44,7 @@ class BMScraper(FileNameUtils):
         self.workers = cpu_count()
         self.processor_factory = processor_factory
         self.rate_limit_lock = None
+        self.prefer_cache = False
 
         self.mutex = threading.RLock()
 
@@ -79,7 +80,13 @@ class BMScraper(FileNameUtils):
             os.makedirs(self.cache_dir)
 
         for subreddit in self.subreddits:
-            workpool.put(DownloadJob(self._requests,
+            css_path = os.path.sep.join([self.cache_dir, subreddit + '.css'])
+            if self.prefer_cache and os.path.exists(css_path):
+                with open(css_path) as css_file:
+                    css = css_file.read().decode('utf8')
+                    self._handle_css(css, subreddit)
+            else:
+                workpool.put(DownloadJob(self._requests,
                                      'http://www.reddit.com/r/{}/stylesheet'.format(subreddit),
                                      retry=5,
                                      rate_limit_lock=self.rate_limit_lock,
