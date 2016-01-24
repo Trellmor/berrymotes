@@ -53,19 +53,21 @@ class BMScraper(FileNameUtils):
 
     def _dedupe_emotes(self):
         with self.mutex:
+            seen_emotes = set()
             for subreddit in self.subreddits:
                 subreddit_emotes = [x for x in self.emotes if x['sr'] == subreddit]
-                other_subreddits_emotes = [x for x in self.emotes if x['sr'] != subreddit]
-                for subreddit_emote in subreddit_emotes:
-                    for emote in other_subreddits_emotes:
-                        for name in subreddit_emote['names']:
-                            if name in emote['names']:
-                                emote['names'].remove(name)
-                                logger.debug('Removing {} from {}'.format(name, emote['sr']))
-                                if len(emote['names']) == 0:
-                                    logger.debug('Completely removed')
-                                    self.emotes.remove(emote)
 
+                for emote in subreddit_emotes:
+                    for name in list(emote['names']):
+                        if name in seen_emotes:
+                            emote['names'].remove(name)
+                            logger.debug('Removing {} from {}'.format(name, emote['sr']))
+                        else:
+                            seen_emotes.add(name)
+
+                    if len(emote['names']) == 0:
+                        logger.debug('Completely removed')
+                        self.emotes.remove(emote)
 
     def _fetch_css(self):
         logger.debug("Fetching css using {} threads".format(self.workers))
