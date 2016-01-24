@@ -41,19 +41,19 @@ for subreddit in subreddits:
     emotes_file = os.path.join('..', 'single_emotes', subreddit, 'emotes.json.gz')
     if not os.path.exists(os.path.dirname(emotes_file)):
         os.makedirs(os.path.dirname(emotes_file))
-        
+
     emotes_data = dumps(subreddit_emotes, separators=(',', ': '));
     emotes_data_old = ''
     if (os.path.exists(emotes_file)):
         f = gzip.open(emotes_file, 'r')
         emotes_data_old = f.read()
         f.close()
-    
+
     if emotes_data != emotes_data_old:
-        f = gzip.open(emotes_file, 'wb')    
+        f = gzip.open(emotes_file, 'wb')
         f.write(emotes_data)
         f.close()
-    
+
 f = gzip.open(os.path.join('..', 'single_emotes', 'subreddits.json.gz'), 'wb')
 f.write(dumps(subreddits, separators=(',', ': ')))
 f.close()

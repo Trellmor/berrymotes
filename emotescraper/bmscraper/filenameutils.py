@@ -23,15 +23,15 @@ class FileNameUtils(object):
             return 't'
         else:
             return folder_name.group(1)
-            
+
     def get_file_name(self, image_url):
         return image_url[image_url.rfind('/') + 1:]
-            
+
     def get_file_path(self, image_url, rootdir='.'):
         file_name = self.get_file_name(image_url)
         folder_name = self.get_folder_name(image_url)
-        
+
         file_path = [rootdir, folder_name]
         file_path.append(file_name)
-        
+
         return os.path.sep.join(file_path)

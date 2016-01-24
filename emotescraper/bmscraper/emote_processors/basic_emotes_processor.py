@@ -153,7 +153,7 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
             crop_height = y
             paste_y = crop.size[1]
 
-        crop = image.crop((crop_x, crop_y, crop_width, crop_height))        
+        crop = image.crop((crop_x, crop_y, crop_width, crop_height))
         # Paste area 2
         single_image.paste(crop, (paste_x, paste_y, paste_x + crop.size[0], paste_y + crop.size[1]))
         return single_image

@@ -64,7 +64,7 @@ class BMScraper(FileNameUtils):
                             logger.debug('Removing {} from {}'.format(name, emote['sr']))
                         else:
                             seen_emotes.add(name)
-                    
+
                     if len(emote['names']) == 0:
                         logger.debug('Completely removed')
                         self.emotes.remove(emote)
