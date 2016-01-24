@@ -267,14 +267,18 @@ class BMScraper(FileNameUtils):
 
             # need at least an image for a ponymote. Some trash was getting in.
             # 1500 pixels should be enough for anyone!
-            if ('background-image' in emote
-                and re.sub(r'^(https?:)?//', '', emote['background-image']) not in self.image_blacklist
-                and 'height' in emote and emote['height'] < 1500
-                and 'width' in emote and emote['width'] < 1500):
-                with self.mutex:
-                    self.emotes.append(emote)
+            if 'background-image' in emote:
+                if re.sub(r'^(https?:)?//', '', emote['background-image']) not in self.image_blacklist:
+                    if ('height' in emote and emote['height'] < 1500
+                        and 'width' in emote and emote['width'] < 1500):
+                        with self.mutex:
+                            self.emotes.append(emote)
+                    else:
+                        logger.warn('Discarding emote {} (SR: {}): width or height > 1500px'.format(emote['names'][0], emote['sr']))
+                else:
+                    logger.warn('Discarding emote {} (SR: {}): in image_blacklist'.format(emote['names'][0], emote['sr']))
             else:
-                logger.warn('Discarding emotes {}'.format(emote['names'][0]))
+                logger.warn('Discarding emote {} (SR: {}): no background-image'.format(emote['names'][0], emote['sr']))
 
     def _callback_download_image(self, response, image_path=None):
         if not image_path:
