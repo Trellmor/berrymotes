@@ -54,6 +54,15 @@ for subreddit in subreddits:
         f.write(emotes_data)
         f.close()
 
-f = gzip.open(os.path.join('..', 'single_emotes', 'subreddits.json.gz'), 'wb')
-f.write(dumps(subreddits, separators=(',', ': ')))
-f.close()
+subreddit_data = dumps(subreddits, separators=(',', ': '))
+subreddit_data_old = ''
+subreddit_file = os.path.join('..', 'single_emotes', 'subreddits.json.gz')
+if (os.path.exists(subreddit_file)):
+    f = gzip.open(subreddit_file)
+    subreddit_data_old = f.read()
+    f.close()
+
+if subreddit_data != subreddit_data_old:
+    f = gzip.open(subreddit_file, 'wb')
+    f.write(subreddit_data)
+    f.close()
