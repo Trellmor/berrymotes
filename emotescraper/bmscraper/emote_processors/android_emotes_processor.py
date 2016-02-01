@@ -175,7 +175,7 @@ class AndroidEmotesProcessor(BasicEmotesProcessor, APNGCheck):
 
                     a_emote = {'names': emote['names'],
                                'image': emote_url,
-                               'hash': hashfile(file_name, '{}.{}'.format(emote_url, frame['delay'])),
+                               'hash': hashfile(file_name, '{}.{}.{}'.format(emote_url, frame['index'], frame['delay'])),
                                'index': frame['index'],
                                'delay': frame['delay'],
                                'apng': True,
