@@ -161,6 +161,7 @@ subreddits = [
     "mylittleonions",
     "mylittlepeanutgallery",
     "mylittlepugnippets",
+    "mylittlescoots",
     "mylittlescreamotes",
     "mylittleserver",
     "mylittlesh",
