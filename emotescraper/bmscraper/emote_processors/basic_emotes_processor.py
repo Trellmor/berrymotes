@@ -122,6 +122,10 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
             logger.warn("Emote {}, SR {}: Both width and height exceed image.size".format(max(emote['names'], key=len), emote['sr']))
 
         single_image = Image.new(image.mode, (width, height))
+        if image.mode in ['P', 'L']:
+            palette = image.getpalette()
+            if palette:
+                single_image.putpalette(image.getpalette())
 
         # Crop to image borders
         crop_width = width
