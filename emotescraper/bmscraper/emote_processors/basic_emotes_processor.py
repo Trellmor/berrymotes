@@ -130,6 +130,8 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
             palette = image.getpalette()
             if palette:
                 single_image.putpalette(image.getpalette())
+                if 'transparency' in image.info:
+                    single_image.info['transparency'] = image.info['transparency']
 
         # Crop to image borders
         crop_width = width
