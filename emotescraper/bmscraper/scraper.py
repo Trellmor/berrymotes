@@ -45,11 +45,12 @@ class BMScraper(FileNameUtils):
         self.processor_factory = processor_factory
         self.rate_limit_lock = None
         self.prefer_cache = False
+        self.user_agent = 'Ponymote harvester v2.0 by /u/marminatoror'
 
         self.mutex = threading.RLock()
 
         self._requests = requests.Session()
-        self._requests.headers = {'user-agent', 'User-Agent: Ponymote harvester v2.0 by /u/marminatoror'}
+        self._requests.headers = {'User-Agent': self.user_agent}
 
     def _dedupe_emotes(self):
         with self.mutex:

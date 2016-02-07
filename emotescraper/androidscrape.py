@@ -25,6 +25,7 @@ scraper = BMScraper(factory)
 scraper.user = 'ponymoteharvester'
 scraper.password = 'berry_punch'
 scraper.subreddits = subreddits
+scraper.user_agent = 'linux:Ponymote harvester:v2.1 (by /u/Trellmor)'
 scraper.image_blacklist = image_blacklist_android
 scraper.emote_info = emote_info
 scraper.rate_limit_lock = TokenBucket(15, 30)
