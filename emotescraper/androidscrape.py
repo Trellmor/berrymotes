@@ -32,38 +32,41 @@ scraper.rate_limit_lock = TokenBucket(15, 30)
 
 scraper.scrape()
 
-f = gzip.open(os.path.join('..', 'single_emotes', 'emotes.json.gz'), 'wb')
-f.write(dumps(factory.emotes, separators=(',', ': ')))
-f.close()
+def save_if_new(filename, data):
+    data_old = ''
+    if (os.path.exists(filename)):
+        f = gzip.open(filename, 'r')
+        data_old = f.read()
+        f.close()
 
-for subreddit in subreddits:
-    subreddit_emotes = [x for x in factory.emotes if x['sr'] == subreddit]
+    if data != data_old:
+        f = gzip.open(filename, 'wb')
+        f.write(data)
+        f.close()
+
+def sum_size(emotes):
+    total = 0
+    for image in [emote["image"] for emote in emotes]:
+        filename = os.path.join('..', 'single_emotes', image)
+        total += os.path.getsize(filename)
+    return total
+
+
+def save_subreddit(subreddit):
+    subreddit_emotes = [x for x in factory.emotes if x['sr'] == subreddit['name']]
     subreddit_emotes = sorted(subreddit_emotes, key = lambda x: x['image'])
-    emotes_file = os.path.join('..', 'single_emotes', subreddit, 'emotes.json.gz')
+    emotes_file = os.path.join('..', 'single_emotes', subreddit['name'], 'emotes.json.gz')
     if not os.path.exists(os.path.dirname(emotes_file)):
         os.makedirs(os.path.dirname(emotes_file))
 
-    emotes_data = dumps(subreddit_emotes, separators=(',', ': '));
-    emotes_data_old = ''
-    if (os.path.exists(emotes_file)):
-        f = gzip.open(emotes_file, 'r')
-        emotes_data_old = f.read()
-        f.close()
+    emotes_data = dumps(subreddit_emotes, separators=(',', ': '))
+    save_if_new(emotes_file, emotes_data)
+    subreddit["size"] = sum_size(subreddit_emotes)
 
-    if emotes_data != emotes_data_old:
-        f = gzip.open(emotes_file, 'wb')
-        f.write(emotes_data)
-        f.close()
 
-subreddit_data = dumps(subreddits, separators=(',', ': '))
-subreddit_data_old = ''
+for subreddit in subreddit_data:
+    save_subreddit(subreddit)
+
+subreddit_data = dumps(subreddit_data, separators=(',', ': '))
 subreddit_file = os.path.join('..', 'single_emotes', 'subreddits.json.gz')
-if (os.path.exists(subreddit_file)):
-    f = gzip.open(subreddit_file)
-    subreddit_data_old = f.read()
-    f.close()
-
-if subreddit_data != subreddit_data_old:
-    f = gzip.open(subreddit_file, 'wb')
-    f.write(subreddit_data)
-    f.close()
+save_if_new(subreddit_file, subreddit_data)
