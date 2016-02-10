@@ -236,6 +236,7 @@ subreddit_data = [
     {"name": "adagiodazzle", "added": "2016-01-01"},
     {"name": "ariablaze", "added": "2016-01-01"},
     {"name": "sonatadusk", "added": "2016-01-01"},
+    {"name": "sassymotes", "added": "2016-02-10"}
 ]
 
 subreddits = [subreddit["name"] for subreddit in subreddit_data];
