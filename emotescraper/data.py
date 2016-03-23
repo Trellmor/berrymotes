@@ -209,6 +209,7 @@ subreddit_data = [
     {"name": "speedingturtle", "added": "2016-01-01"},
     {"name": "spitquisition", "added": "2016-01-01"},
     {"name": "stalliongrad", "added": "2016-01-01"},
+    {"name": "steamberryemotes", "added": "2016-03-23"},
     {"name": "sunsetshimmer", "added": "2016-01-01"},
     {"name": "surprise", "added": "2016-01-01"},
     {"name": "sweetie_belle", "added": "2016-01-01"},

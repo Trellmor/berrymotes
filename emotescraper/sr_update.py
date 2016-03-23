@@ -1,11 +1,11 @@
 from json import loads;
 import itertools
 from data import subreddits
-import urllib3
+import requests
 
-http = urllib3.PoolManager()
-r = http.request('GET', 'http://berrymotes.com/assets/berrymotes_json_data.json')
-data = loads(r.data)
+
+r = requests.get('http://berrymotes.com/assets/berrymotes_json_data.json')
+data = loads(r.text)
 key_func = lambda e: e['sr']
 sr_new = []
 for sr, group in itertools.groupby(sorted(data, key=key_func), key_func):
