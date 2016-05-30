@@ -66,6 +66,7 @@ subreddit_data = [
     #"clopclop", Dropped because NSFW
     #"clopmotes", Dropped because NSFW
     {"name": "cloudchasermotes", "added": "2016-01-01"},
+    {"name": "coloratura", "added": "2016-04-22"},
     {"name": "commabombing", "added": "2016-01-01"},
     {"name": "cuttershy", "added": "2016-01-01"},
     {"name": "dashiemotes", "added": "2016-01-01"},
@@ -93,6 +94,7 @@ subreddit_data = [
     {"name": "isthisanemoteyet", "added": "2016-01-01"},
     {"name": "jacksanimotes", "added": "2016-01-01"},
     {"name": "kalymotes", "added": "2016-01-01"},
+    {"name": "kalymotes2", "added": "2016-05-30"},
     {"name": "kimberlybt", "added": "2016-01-01"},
     {"name": "kimsderpydoodles", "added": "2016-01-01"},
     {"name": "littlecolt", "added": "2016-01-01"},
@@ -209,10 +211,11 @@ subreddit_data = [
     {"name": "speedingturtle", "added": "2016-01-01"},
     {"name": "spitquisition", "added": "2016-01-01"},
     {"name": "stalliongrad", "added": "2016-01-01"},
-    {"name": "steamberryemotes", "added": "2016-03-23"},
+    {"name": "SteamBerryEmotes", "added": "2016-03-23"},
     {"name": "sunsetshimmer", "added": "2016-01-01"},
     {"name": "surprise", "added": "2016-01-01"},
     {"name": "sweetie_belle", "added": "2016-01-01"},
+    {"name": "Swyft", "added": "2016-04-02"},
     {"name": "tacoshy", "added": "2016-01-01"},
     {"name": "takedaemotes", "added": "2016-01-01"},
     {"name": "taviquisition", "added": "2016-01-01"},
