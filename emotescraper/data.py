@@ -68,6 +68,7 @@ subreddit_data = [
     {"name": "cloudchasermotes", "added": "2016-01-01"},
     {"name": "coloratura", "added": "2016-04-22"},
     {"name": "commabombing", "added": "2016-01-01"},
+    {"name": "cuteponymotes", "added": "2016-07-07"},
     {"name": "cuttershy", "added": "2016-01-01"},
     {"name": "dashiemotes", "added": "2016-01-01"},
     {"name": "daxterionfanclub", "added": "2016-01-01"},
@@ -77,6 +78,7 @@ subreddit_data = [
     {"name": "dumbtoxin", "added": "2016-01-01"},
     {"name": "EquestriaGirls", "added": "2016-01-01"},
     {"name": "falloutequestria", "added": "2016-01-01"},
+    {"name": "FanficsEmotes", "added": "2016-06-22"},
     {"name": "findauseforthesemotes", "added": "2016-01-01"},
     {"name": "flait111", "added": "2016-01-01"},
     {"name": "flitter", "added": "2016-01-01"},
@@ -204,6 +206,7 @@ subreddit_data = [
     {"name": "seriouslyluna", "added": "2016-01-01"},
     {"name": "sexyconfederatereddit", "added": "2016-01-01"},
     {"name": "shadeschatlounge", "added": "2016-01-01"},
+    {"name": "shipgirlemotes", "added": "2016-07-07"},
     {"name": "shittyemotes", "added": "2016-01-01"},
     #"spaceclop", Dropped because NSFW
     {"name": "snakemote", "added": "2016-01-01"},
