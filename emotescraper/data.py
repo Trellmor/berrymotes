@@ -191,6 +191,7 @@ subreddit_data = [
     {"name": "ploungeafterdark", "added": "2016-01-01"},
     {"name": "ploungefootballleague", "added": "2016-01-01"},
     {"name": "ploungemafia", "added": "2016-01-01"},
+    {"name": "ponk", "added": "2016-09-27"},
     {"name": "ponyanarchism", "added": "2016-01-01"},
     {"name": "ponymotes", "added": "2016-01-01"},
     {"name": "ponymotesextra", "added": "2016-01-01"},
