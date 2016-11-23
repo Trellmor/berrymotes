@@ -73,6 +73,7 @@ subreddit_data = [
     {"name": "dashiemotes", "added": "2016-01-01"},
     {"name": "daxterionfanclub", "added": "2016-01-01"},
     {"name": "daylightemotes", "added": "2016-01-01"},
+    {"name": "deltasdraws", "added": "2016-11-23"},
     {"name": "desktopponies", "added": "2016-01-01"},
     {"name": "dumbrock", "added": "2016-01-01"},
     {"name": "dumbtoxin", "added": "2016-01-01"},
