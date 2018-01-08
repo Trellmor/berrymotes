@@ -90,6 +90,7 @@ subreddit_data = [
     {"name": "greenganache", "added": "2016-01-01"},
     {"name": "greenganache2", "added": "2016-01-01"},
     {"name": "HeartsEmoteEmporium", "added": "2017-01-15"},
+    {"name": "HeartsEmoteWarehose1", "added": "2018-01-08"},
     {"name": "himntor", "added": "2016-01-01"},
     {"name": "hugemotes", "added": "2016-01-01"},
     {"name": "idliketobeatree", "added": "2016-01-01"},
