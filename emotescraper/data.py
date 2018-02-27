@@ -214,6 +214,7 @@ subreddit_data = [
     {"name": "shittyemotes", "added": "2016-01-01"},
     #"spaceclop", Dropped because NSFW
     {"name": "snakemote", "added": "2016-01-01"},
+    {"name": "snakemote2", "added": "2018-02-27"},
     {"name": "spanishmeerkat", "added": "2016-01-01"},
     {"name": "speedingturtle", "added": "2016-01-01"},
     {"name": "spitquisition", "added": "2016-01-01"},
