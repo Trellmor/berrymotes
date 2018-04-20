@@ -187,7 +187,7 @@ class BMScraper(FileNameUtils):
                             name = declaration.name
                             if name == 'background-position':
                                 val = ['{}{}'.format(v.value, v.unit if v.unit else '') for v in declaration.value if
-                                       v.value != ' ']
+                                       v.value != ' ' and v.value != ',']
                             else:
                                 val = declaration.value[0].value
                             if match.group(2):

@@ -51,14 +51,14 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
     def process_emote(self, emote):
         file_name = self.single_emotes_filename.format(emote['sr'], max(emote['names'], key=len))
         if not os.path.exists(file_name):
-            cropped = self.extract_single_image(emote, self.image)
-            if not cropped:
-                return
-
-            if not cropped.getbbox():
-                logger.warn("{} might be empty".format(file_name))
-
             try:
+                cropped = self.extract_single_image(emote, self.image)
+                if not cropped:
+                    return
+
+                if not cropped.getbbox():
+                    logger.warn("{} might be empty".format(file_name))
+
                 if not os.path.exists(os.path.dirname(file_name)):
                     try:
                         os.makedirs(os.path.dirname(file_name))
@@ -70,6 +70,7 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
                 f.close()
             except Exception, e:
                 logger.exception(e)
+                logger.error("Emote file: {}".format(file_name))
 
     def load_image(self, image_file):
         f = open(image_file, 'rb')
