@@ -45,6 +45,9 @@ class DownloadJob(Job):
                     logger.exception(e)
                     response = None
                 finally:
+                    if response is not None and response.status_code == 403:
+                        logger.error("Error loading {}: Access denied (Code {})".format(self._url, response.status_code))
+                        self._retry = 0
                     if response is None or response.status_code != 200:
                         logger.warn("Error loading {} (Code {}), retrying {} more times".format(self._url, response.status_code if response is not None else 0, self._retry))
                         backoff += 10
