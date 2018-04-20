@@ -88,7 +88,7 @@ class BMScraper(FileNameUtils):
                     self._handle_css(css, subreddit)
             else:
                 workpool.put(DownloadJob(self._requests,
-                                     'http://www.reddit.com/r/{}/stylesheet'.format(subreddit),
+                                     'https://old.reddit.com/r/{}/stylesheet'.format(subreddit),
                                      retry=5,
                                      rate_limit_lock=self.rate_limit_lock,
                                      callback=self._callback_fetch_stylesheet,
