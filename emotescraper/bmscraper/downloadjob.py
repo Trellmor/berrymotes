@@ -45,8 +45,8 @@ class DownloadJob(Job):
                     logger.exception(e)
                     response = None
                 finally:
-                    if not response or response.status_code != 200:
-                        logger.warn("Error loading {}, retrying {} more times".format(self._url, self._retry))
+                    if response is None or response.status_code != 200:
+                        logger.warn("Error loading {} (Code {}), retrying {} more times".format(self._url, response.status_code if response is not None else 0, self._retry))
                         backoff += 10
                         sleep(backoff)
 

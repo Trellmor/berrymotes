@@ -208,15 +208,15 @@ class BMScraper(FileNameUtils):
             with open(css_path) as css_file:
                 css = css_file.read().decode('utf8')
 
-        if not response:
+        if response is None:
             logger.error("Failed to fetch css for {}".format(subreddit))
-
-        if response.status_code != 200:
-            logger.error("Failed to fetch css for {} (Status {})".format(subreddit, response.status_code))
         else:
-            css = response.text
-            with open(css_path, 'w') as css_file:
-                css_file.write(css.encode('utf8'))
+            if response.status_code != 200:
+                logger.error("Failed to fetch css for {} (Status {})".format(subreddit, response.status_code))
+            else:
+                css = response.text
+                with open(css_path, 'w') as css_file:
+                    css_file.write(css.encode('utf8'))
 
         if css == '':
             logger.error("No css for {} found".format(subreddit))
@@ -286,7 +286,7 @@ class BMScraper(FileNameUtils):
             logger.error("image_path not set")
             return
 
-        if not response:
+        if response is None:
             logger.error("Failed to fetch image {}".format(image_path))
             return
 
