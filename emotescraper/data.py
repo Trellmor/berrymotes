@@ -279,6 +279,7 @@ subreddit_data = [
     {"name": "tbpimagedump", "added": "2016-01-01"},
     {"name": "tbpimagedump2", "added": "2016-01-01"},
     {"name": "tempestmotes", "added": "2017-12-24"},
+    {"name": "TempestShadow", "added": "2018-04-21"},
     {"name": "thanksblueshift", "added": "2016-01-01"},
     {"name": "thanksberrytube", "added": "2016-01-01"},
     {"name": "thebelletower", "added": "2018-04-20"},
