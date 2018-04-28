@@ -116,7 +116,7 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
             y -= image.size[1]
 
         # If the crop area equals the image, return it
-        if x + width == image.size[0] and y + height == image.size[1]:
+        if x == 0 and width == image.size[0] and y == 0 and height == image.size[1]:
             return image
 
         # If the crop area fits inside the image, return the cropped image
