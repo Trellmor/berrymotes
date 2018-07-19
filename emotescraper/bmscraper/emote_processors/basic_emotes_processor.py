@@ -86,14 +86,20 @@ class BasicEmotesProcessor(AbstractEmotesProcessor, FileNameUtils):
         height = emote['height']
         if 'background-position' in emote:
             if len(emote['background-position']) > 0:
-                x = int(emote['background-position'][0].strip('px').strip('%'))
-                if emote['background-position'][0].endswith('%'):
-                    x = width * x / 100;
+                try:
+                    x = int(emote['background-position'][0].strip('px').strip('%'))
+                    if emote['background-position'][0].endswith('%'):
+                        x = width * x / 100;
+                except ValueError:
+                    logger.warning("Invalid background position {} for emote {}".format(emote['background-position'][0], max(emote['names'], key=len)))
 
             if len(emote['background-position']) > 1:
-                y = int(emote['background-position'][1].strip('px').strip('%'))
-                if emote['background-position'][1].endswith('%'):
-                    y = height * y / 100;
+                try:
+                    y = int(emote['background-position'][1].strip('px').strip('%'))
+                    if emote['background-position'][1].endswith('%'):
+                        y = height * y / 100;
+                except ValueError:
+                    logger.warning("Invalid background position {} for emote {}".format(emote['background-position'][0], max(emote['names'], key=len)))
 
         # Convert css coordinates to image coordiantes
         if x > 0:
