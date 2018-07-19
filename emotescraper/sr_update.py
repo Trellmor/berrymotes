@@ -4,7 +4,7 @@ from data import subreddits
 import requests
 
 
-r = requests.get('http://berrymotes.com/assets/berrymotes_json_data.json')
+r = requests.get('https://cdn.berrytube.tv/berrymotes/data/berrymotes_json_data.json')
 data = loads(r.text)
 key_func = lambda e: e['sr']
 sr_new = []
