@@ -115,6 +115,7 @@ subreddit_data = [
     {"name": "hugemotes", "added": "2016-01-01"},
     {"name": "idliketobeatree", "added": "2016-01-01"},
     {"name": "ilovedashie", "added": "2016-01-01"},
+    {"name": "ironsalsa", "added": "2018-12-15"},
     {"name": "isthisananimoteyet", "added": "2016-01-01"},
     {"name": "isthisanemoteyet", "added": "2016-01-01"},
     {"name": "jacksanimotes", "added": "2016-01-01"},
@@ -284,7 +285,7 @@ subreddit_data = [
     {"name": "TempestShadow", "added": "2018-04-21"},
     {"name": "thanksblueshift", "added": "2016-01-01"},
     {"name": "thanksberrytube", "added": "2016-01-01"},
-    {"name": "thebelletower", "added": "2018-04-20"},
+    {"name": "TheBelleTower", "added": "2018-04-20"},
     {"name": "thebestpony", "added": "2016-01-01"},
     {"name": "thecane", "added": "2016-01-01"},
     #"themirishponies", Dropped because invite only
